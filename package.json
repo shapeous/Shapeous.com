@@ -1,0 +1,11 @@
+{
+  "name": "Shapeous",
+  "version": "0.0.1",
+  "description": "Shapeous.com Web site",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shapeous/Shapeous.git"
+  },
+  "author": "Shapeous",
+  "license": "ISC"
+}
