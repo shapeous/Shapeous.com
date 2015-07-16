@@ -1,9 +1,10 @@
 // style.scss
-// ==============
- 
-//Compass imports
-@import "compass";
-@import "compass/reset";
+// ==========
 
-//Core partials
+// Compass imports
+@import "compass";
+
+// Core partials
+@import "normalize";
 @import "variables";
+@import "main";
