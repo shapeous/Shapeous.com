@@ -8,7 +8,8 @@ var gulp = require("gulp")
 // sources
 var appRoot = "dev/"
   , srcRoot = "src/"
-  , htmlSrc = appRoot + "*.html"
+  , prdRoot = "/Volumes/Macintosh HD-1/Library/WebServer/Documents/"
+  , htmlSrc = appRoot + "**/*.html"
   , sassSrc = srcRoot + "sass/"
   ;
 
@@ -22,13 +23,13 @@ gulp.task("connect", function() {
 
 gulp.task("html", function() {
   // I handle html files
-  gulp.src(htmlSrc)
+  return gulp.src(htmlSrc)
     .pipe(conn.reload());
 });
 
 gulp.task("compass", function() {
   // I transpile SASS files into CSS
-  gulp.src(sassSrc + "style.scss")
+  return gulp.src(sassSrc + "style.scss")
     .pipe(sass(
       { "sass":	sassSrc
       , "style": "expanded"
@@ -44,9 +45,16 @@ gulp.task("compass", function() {
 gulp.task("watch", function() {
   // I watch for file changes and run tasks
   gulp.watch(htmlSrc, ["html"]);
-  gulp.watch(sassSrc + "*.scss", ["compass"]);
+  gulp.watch(sassSrc + "**/*.scss", ["compass"]);
 });
 
 gulp.task("default", ["connect", "html", "compass", "watch"], function() {
   util.log("- I loaded all above tasks ;)");
+});
+
+gulp.task("deploy", function() {
+  // I promote the code to PRD
+  return gulp.src(appRoot + "**/*.*")
+    .pipe(del(prdRoot))
+    .pipe(gulp.dest(prdRoot));
 });
